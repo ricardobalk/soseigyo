@@ -16,7 +16,7 @@ The docker-compose file makes it simple to run it with a single command: `docker
 
 ### Security
 
-The TLS configuration included in Soseigyo is based on strong, modern ciphers and protocols. It also includes a few security headers, like `Expect-CT`, `Feature-Policy`, `Strict-Transport-Security`, `X-Content-Type-Options`, `X-Frame-Options`, `X-XSS-Protection` and `Referrer-Policy`, as recommended by Scott Helme's [Security Headers](https://securityheaders.com/) tool.
+The TLS configuration included in Soseigyo is based on strong, modern ciphers and protocols. It also includes a few security headers, like `Expect-CT`, `Permissions-Policy`, `Strict-Transport-Security`, `X-Content-Type-Options`, `X-Frame-Options`, `X-XSS-Protection` and `Referrer-Policy`, as recommended by Scott Helme's [Security Headers](https://securityheaders.com/) tool.
 
 This set-up also contains a container for certbot, which is used to obtain and renew TLS certificates.
 
