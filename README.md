@@ -56,7 +56,9 @@ If that succeeds, you can remove the `--dry-run` flag and run the command again:
 
 4. Link `config/nginx/sites-available/000-default-https.conf` to `config/nginx/sites-enabled/000-default-https.conf`, by running `ln -s '../sites-available/000-default-https.conf' config/nginx/sites-enabled/000-default-https.conf`.
 
-5. Restart the nginx container with `docker-compose restart nginx`.
+5. Edit `config/nginx/sites-available/000-default.conf` so it redirects to HTTPS.
+
+6. Restart the nginx container with `docker-compose restart nginx`.
 
 ## How to contribute
 
