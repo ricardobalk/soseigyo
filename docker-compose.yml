@@ -1,0 +1,29 @@
+version: '3'
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./config/nginx:/etc/nginx
+      - ./webroot:/var/www:ro
+      - letsencrypt-etc:/etc/letsencrypt:ro
+    command: ["nginx", "-g", "daemon off;"]
+
+  letsencrypt:
+    image: certbot/certbot:latest
+    ports: 
+      - "4080:4080"
+    volumes:
+      - letsencrypt-etc:/etc/letsencrypt
+      - letsencrypt-var:/var/lib/letsencrypt
+    entrypoint: /bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'
+
+volumes:
+  letsencrypt-etc:
+  letsencrypt-var:
+
+networks:
+  default:
+    name: soseigyo

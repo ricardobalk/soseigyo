@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <title>The end of the internet.</title>
+    <meta charset="ISO-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+      body { height: 100%; margin: 0; font-family: Arial, Helvetica, sans-serif; }
+      article { padding: 1rem; }
+      ul { padding-left: .66rem; list-style-type: "\2013"; }
+      ul li { padding-left: .5rem; line-height: 1.5; }
+
+      @media screen and (min-width: 640px) {
+        body { display: flex; align-items: center; justify-content: center; }
+        article { padding: 1rem 2.5rem; border-radius: 1rem; background: #efefef; }
+      }
+
+      @media screen and (prefers-color-scheme: dark) {
+        body { background: #111; color: #aaa; }
+        a { color: #74cafe; }
+        article { background: #161616; }
+      }
+    </style>
+    <!--# if expr="$status = 502" -->
+      <meta http-equiv="refresh" content="2">
+    <!--# endif -->
+  </head>
+
+  <body>
+    <article>
+      <h1><!--# echo var="status" default="" --> <!--# echo var="status_text" default="Something goes wrong" --></h1>
+      <!--# if expr="$status = 418" -->
+      <p>
+        I'm a teapot. But they say that coffee is a better substitute.
+      </p>
+      <!--# else -->
+      <p>
+        You're reading the last page of the internet,
+        but it's not the end of the world.
+      </p>
+      <!--# endif -->
+      <p>
+        Here are a some things you could do now:
+      </p>
+      
+      <ul>
+        <!--# if expr="$status = 418" -->
+        <li>Read a good book with coffee recipes</li>
+        <li>Brew your own coffee</li>
+        <li>Enjoy your coffee</li>
+        <!--# else -->
+        <li>Read a good book</li>
+        <li>Hang out with some friends</li>
+        <li>Enjoy sunset</li>
+        <!--# endif -->
+      </ul>
+    </article>
+  </body>
+</html>
