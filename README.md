@@ -44,15 +44,9 @@ So here's what you need to do:
 
 1. Start the containers with `docker-compose up` or `docker-compose up -d`.
 
-2. Obtain a TLS certificate with certbot. You can do this by running `docker-compose exec letsencrypt certbot certonly --dry-run --quiet --standalone --http-01-port 4080 --preferred-challenges http --rsa-key-size 4096 --agree-tos --email john.doe@example.com -d example.com -d www.example.com`.
+2. Obtain a TLS certificate with certbot. You can do this by running `docker-compose exec letsencrypt certbot certonly --dry-run --quiet --webroot --rsa-key-size 4096 --agree-tos --email john.doe@example.com -w /var/www/example.com -d example.com -d www.example.com`.
 
 Replacing the email address and domain names with your own values, of course.
-
-This way, certbot uses the standalone plugin to obtain and renew TLS certificates. The reason for that is because certbot is running inside its own container.
-
-With the given command line, it uses port `4080` which needs to be reachable from the outside world. You can change this, but you will need to change it in the `docker-compose.yml` as well.
-
-Another popular option would be using a DNS-01 challenge, using one of the available DNS plugins. This would verify the domain name by automatically adding a TXT record to your DNS records. You can find more information about the DNS-01 challenge in the [certbot documentation](https://certbot.eff.org/docs/using.html#dns-plugins).
 
 3. Edit `config/nginx/000-default-https.conf` so it contains the correct domain names, e.g. `example.com` and `www.example.com` and it points to the correct certificate and key files.
 
