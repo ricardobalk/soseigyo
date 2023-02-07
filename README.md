@@ -44,13 +44,17 @@ So here's what you need to do:
 
 1. Start the containers with `docker-compose up` or `docker-compose up -d`.
 
-2. Obtain a TLS certificate with certbot. You can do this by running `docker-compose exec letsencrypt certbot certonly --dry-run --quiet --webroot --rsa-key-size 4096 --agree-tos --email john.doe@example.com -w /var/www/example.com -d example.com -d www.example.com`.
+2. Obtain a TLS certificate with certbot. You can do this by running `docker-compose exec letsencrypt certbot certonly --dry-run --webroot --rsa-key-size 4096 --agree-tos --email john.doe@example.com -w /var/www/example.com -d example.com -d www.example.com`.
 
 Replacing the email address and domain names with your own values, of course.
 
-3. Edit `config/nginx/000-default-https.conf` so it contains the correct domain names, e.g. `example.com` and `www.example.com` and it points to the correct certificate and key files.
+If that succeeds, you can remove the `--dry-run` flag and run the command again:
 
-4. Link `config/nginx/000-default-https.conf` to `config/nginx/sites-enabled/000-default-https.conf`, by running `ln -s config/nginx/000-default-https.conf config/nginx/sites-enabled/000-default-https.conf`.
+`docker-compose exec letsencrypt certbot certonly --quiet --webroot --rsa-key-size 4096 --agree-tos --email john.doe@example.com -w /var/www/example.com -d example.com -d www.example.com`.
+
+3. Edit `config/nginx/sites-available/000-default-https.conf` so it contains the correct domain names, e.g. `example.com` and `www.example.com` and it points to the correct certificate and key files.
+
+4. Link `config/nginx/sites-available/000-default-https.conf` to `config/nginx/sites-enabled/000-default-https.conf`, by running `ln -s '../sites-available/000-default-https.conf' config/nginx/sites-enabled/000-default-https.conf`.
 
 5. Restart the nginx container with `docker-compose restart nginx`.
 
