@@ -38,7 +38,7 @@ The usual way to use Soseigyo is to clone this repository and then to customize 
 
 I have included a container for certbot, which is used to obtain and renew TLS certificates. However, you will need to configure it to your needs. Upon the first start of the containers, it will not request certificates, as it is only configured to renew certificates. You will need to obtain a certificate manually.
 
-Besides that, `etc/nginx/000-default-https.conf` is not linked to `etc/nginx/sites-enabled/000-default-https.conf`, because otherwise nginx would not start.
+Besides that, `config/nginx/000-default-https.conf` is not linked to `config/nginx/sites-enabled/000-default-https.conf`, because otherwise nginx would not start.
 
 So here's what you need to do:
 
@@ -54,9 +54,9 @@ With the given command line, it uses port `4080` which needs to be reachable fro
 
 Another popular option would be using a DNS-01 challenge, using one of the available DNS plugins. This would verify the domain name by automatically adding a TXT record to your DNS records. You can find more information about the DNS-01 challenge in the [certbot documentation](https://certbot.eff.org/docs/using.html#dns-plugins).
 
-3. Edit `etc/nginx/000-default-https.conf` so it contains the correct domain names, e.g. `example.com` and `www.example.com` and it points to the correct certificate and key files.
+3. Edit `config/nginx/000-default-https.conf` so it contains the correct domain names, e.g. `example.com` and `www.example.com` and it points to the correct certificate and key files.
 
-4. Link `etc/nginx/000-default-https.conf` to `etc/nginx/sites-enabled/000-default-https.conf`, by running `docker-compose exec nginx ln -s /etc/nginx/sites-available/000-default-https.conf /etc/nginx/sites-enabled/000-default-https.conf`.
+4. Link `config/nginx/000-default-https.conf` to `config/nginx/sites-enabled/000-default-https.conf`, by running `ln -s config/nginx/000-default-https.conf config/nginx/sites-enabled/000-default-https.conf`.
 
 5. Restart the nginx container with `docker-compose restart nginx`.
 
